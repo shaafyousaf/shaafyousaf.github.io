@@ -29,9 +29,9 @@ const overlayImage = '/optimized/resources/blackSideOverlayGradient.webp'
                     :transition="{ duration: 1, delay: 0.55, ease: [0.16, 1, 0.3, 1] }">
                     I'm Shaaf Yousaf — third-year Software Engineering student at UofT Scarborough. I build softwares,
                     tinker with hardware, and occasionally photograph satellites and stars. </Motion>
-                <Motion class="hero-tags" :initial="{ opacity: 0, filter: 'blur(8px)' }"
+                <!-- <Motion class="hero-tags" :initial="{ opacity: 0, filter: 'blur(8px)' }"
                     :while-in-view="{ opacity: 1, filter: 'blur(0px)' }"
-                    :transition="{ duration: 1, delay: 0.6, ease: [0.16, 1, 0.3, 1] }">
+                    :transition="{ duration: 1, delay: 0.6, ease: [0.16, 1, 0.3, 1] }"> -->
 
                     <div class="tag">.NET Developer @ Ontario Government</div>
 
