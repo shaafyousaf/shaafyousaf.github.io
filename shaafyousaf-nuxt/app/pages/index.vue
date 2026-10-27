@@ -828,6 +828,11 @@ const wins = [
     gap: 1.25rem;
   }
 
+  /* Text only on phones; the screenshots are too small to read there */
+  .project-image {
+    display: none;
+  }
+
 
   .sub-title--spaced {
     margin-top: 3rem;
