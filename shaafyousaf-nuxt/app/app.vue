@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { MotionConfig } from 'motion-v';
 import { Analytics } from '@vercel/analytics/nuxt'
 
 </script>
@@ -7,9 +6,5 @@ import { Analytics } from '@vercel/analytics/nuxt'
 
 
 <template>
-  <MotionConfig :inViewOptions="{ once: true }">
-    <NuxtLayout>
-      <NuxtPage />
-    </NuxtLayout>
-  </MotionConfig>
+  <NuxtPage />
 </template>

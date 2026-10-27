@@ -335,6 +335,12 @@ onUnmounted(() => {
 
 <template>
   <div class="homelab-page">
+    <!-- No navbar on the single-page site; this is the only way back -->
+    <NuxtLink to="/" class="back-link" aria-label="Back to shaafyousaf.com">
+      <img src="/optimized/images/shaafonlylabsfontlogoshort_Small.webp" alt="Shaaf" />
+      <span>← Back</span>
+    </NuxtLink>
+
     <!-- Hero Section -->
     <HomelabHero 
       :background-image="backgroundImage"
@@ -393,6 +399,29 @@ onUnmounted(() => {
 .homelab-page {
   background: #000000;
   min-height: 100vh;
+  position: relative;
+}
+
+.back-link {
+  position: absolute;
+  top: clamp(1.25rem, 4vw, 2.5rem);
+  left: clamp(1.25rem, 4vw, 3rem);
+  z-index: 120;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-family: 'Nexa', sans-serif;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.back-link img {
+  height: 40px;
+  width: auto;
+}
+
+.back-link:hover span {
+  color: var(--color-gold);
 }
 
 /* Tab Navigation */
