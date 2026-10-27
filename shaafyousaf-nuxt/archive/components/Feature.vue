@@ -8,7 +8,7 @@ interface Photo {
 
 interface Props {
   id?: string
-  kicker: string
+  kicker?: string
   title: string
   photos: Photo[]
   /** Labelled lines, e.g. { label: 'Platform', value: 'Chrome Web Store' } */
@@ -57,7 +57,7 @@ const isExternal = (url: string) => /^https?:/.test(url)
     </div>
 
     <div class="info">
-      <p class="kicker">{{ kicker }}</p>
+      <p v-if="kicker" class="kicker">{{ kicker }}</p>
       <h3 class="title">{{ title }}</h3>
       <div class="body"><slot /></div>
 

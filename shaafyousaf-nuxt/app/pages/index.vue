@@ -10,6 +10,40 @@ useHead({
 
 const email = 'shaaf.yousaf@mail.utoronto.ca'
 
+/* ---------- HomeLab: live status from the server's observer endpoint ---------- */
+
+const PING_INTERVAL_SECS = 60
+const serverConnected = ref(false)
+const uptime = ref('--')
+const secondsUntilNextPing = ref(PING_INTERVAL_SECS)
+
+let pollingTimer: ReturnType<typeof setInterval> | null = null
+let countdownTimer: ReturnType<typeof setInterval> | null = null
+
+async function checkServer() {
+  secondsUntilNextPing.value = PING_INTERVAL_SECS
+  try {
+    const response = await fetch('https://the-great-server.shaafyousaf.com/Observer')
+    serverConnected.value = response.ok && (await response.text()).includes('All Systems Nominal.')
+  } catch {
+    serverConnected.value = false
+  }
+  if (serverConnected.value) uptime.value = 'Connected to Server-Observer-Utility'
+}
+
+onMounted(async () => {
+  await checkServer()
+  pollingTimer = setInterval(checkServer, PING_INTERVAL_SECS * 1000)
+  countdownTimer = setInterval(() => {
+    if (secondsUntilNextPing.value > 0) secondsUntilNextPing.value--
+  }, 1000)
+})
+
+onUnmounted(() => {
+  if (pollingTimer) clearInterval(pollingTimer)
+  if (countdownTimer) clearInterval(countdownTimer)
+})
+
 /* ---------- Experience: a briefing per role, no photos ---------- */
 
 const jobs = [
@@ -17,16 +51,14 @@ const jobs = [
     dates: 'May 2026 to present',
     role: '.NET Developer',
     org: 'Ontario Government',
-    brief: "Work on PICASSO, the C# .NET framework behind several of Ontario's education apps, and built the test automation QA uses to write tests in plain English.",
-    stack: 'C#, .NET, Angular, Playwright, TypeScript, Azure',
+    brief: "Work on PICASSO, the C# .NET framework behind several of Ontario's education apps, and built the test automation QA uses to write tests in plain English. Day to day that means C#, .NET, Angular, TypeScript, Playwright and Azure.",
     url: 'https://utsccoopshaaf.vercel.app/',
   },
   {
     dates: 'Sep 2025 to Apr 2026',
     role: 'Junior Software Developer',
     org: 'University of Toronto Schools',
-    brief: 'Rebuilt two legacy apps used daily by staff and students on a modern .NET stack, and built the IT ticketing platform from scratch.',
-    stack: 'C#, .NET, Blazor, GraphQL, EF Core, SignalR, SQL Server',
+    brief: 'Rebuilt two legacy apps used daily by staff and students, and built the IT ticketing platform from scratch, all in C# and .NET with Blazor, GraphQL, EF Core, SignalR and SQL Server.',
     url: 'https://files.shaafyousaf.com/UTS%20-%20Sep%2025%20to%20Apr%2026/home_artifact-number-1-asset-tracker.html',
   },
 ]
@@ -80,7 +112,6 @@ const wins = [
     project: 'idrak',
     event: 'DaVinci Competition 2026',
     line: 'A camera-based assistant that guides you through hands-on tasks in real time.',
-    prize: '$600 cash prize',
     image: '/images/BannerLinkedin.png',
     url: 'https://devpost.com/software/idrak',
   },
@@ -90,7 +121,6 @@ const wins = [
     project: 'imagEHR',
     event: 'GenAI Genesis 2025',
     line: 'Turns EHR text and X-rays into standard clinical data, a job that takes 6 to 8 weeks by hand.',
-    prize: 'Awarded by Google and HBSU',
     image: '/images/genai_imagehr_wid_c.jpg',
     url: 'https://devpost.com/software/imagehr',
   },
@@ -123,9 +153,6 @@ const wins = [
                 <h3 class="job-role">{{ job.role }}</h3>
                 <p class="job-org">{{ job.org }}</p>
                 <p class="job-brief">{{ job.brief }}</p>
-                <ul class="tags" :aria-label="`${job.role} stack`">
-                  <li v-for="tech in job.stack.split(', ')" :key="tech" class="tag">{{ tech }}</li>
-                </ul>
                 <a :href="job.url" target="_blank" rel="noopener" class="link job-link">
                   Work sample <Icon name="heroicons:arrow-up-right-20-solid" class="link-icon" />
                 </a>
@@ -149,45 +176,52 @@ const wins = [
       <section id="projects" class="wrap group">
         <h2 class="group-title">Projects</h2>
 
-        <div class="features">
-          <Feature
+        <div class="banners">
+          <ProjectBanner
             id="slowed-enhanced"
-            kicker="Chrome extension, open source"
             title="Slowed Enhanced"
-            :photos="[{ src: '/optimized/images/_DSC4383_compressed.webp', position: '70% 70%' }]"
+            subtitle="An Open Source Google Chrome Extension for Advanced Audio Controls"
+            meta="Published on Chrome Web Store"
+            :photos="[{ src: '/optimized/images/_DSC4383_compressed.webp', position: '0 45%' }]"
             :stats="[
-              { value: '1,500+', label: 'installs' },
-              { value: '110+', label: 'weekly active users' },
-              { value: '#14', label: 'on Product Hunt' },
+              { value: '1,500+', label: 'Installs' },
+              { value: '110+', label: 'Weekly active users' },
+              { value: '#14', label: 'Product Hunt' },
             ]"
             :links="[
               { label: 'Chrome Web Store', url: 'https://chromewebstore.google.com/detail/mbknnccopgggeedhnloodppflepboggp' },
               { label: 'Source', url: 'https://github.com/shaafyousaf/Slowed-Enhanced' },
               { label: 'Product Hunt', url: 'https://www.producthunt.com/products/slowed-enchanced/launches/slowed-enchanced' },
             ]"
-          >
-            <p>Volume, speed and reverb controls for any tab in Chrome, with pitch preservation. Collects no data.</p>
-          </Feature>
+          />
 
-          <Feature
+          <ProjectBanner
             id="homelab"
-            reverse
-            kicker="Home server, running 24/7"
             title="HomeLab"
+            subtitle="The cloud is just someone else's computer. This one's mine."
+            hero-title
             :photos="[
-              { src: '/optimized/images/homeserveroldPic.webp', position: 'center 40%' },
+              { src: '/optimized/images/homeserveroldPic.webp', position: '0 40%' },
               { src: '/homelab/motherboardimage.jpeg', position: 'center' },
               { src: '/homelab/setupimage.jpeg', position: 'center 30%' },
             ]"
             :stats="[
-              { value: '10+', label: 'self-hosted services' },
-              { value: 'CI/CD', label: 'self-hosted GitHub Actions runner' },
+              { value: '10+', label: 'Self-hosted services' },
+              { value: 'CI/CD', label: 'Self-hosted GitHub Actions runner' },
             ]"
             :links="[{ label: 'Read the write-up', url: '/homelab' }]"
           >
-            <p>The cloud is just someone else's computer. This one's mine.</p>
-            <p>Ubuntu Server on a repurposed laptop, with Docker services behind Nginx and a Cloudflare Tunnel.</p>
-          </Feature>
+            <!-- Only shown while the server answers; /homelab still shows LINK-DOWN -->
+            <template v-if="serverConnected" #default>
+              <ServerStatusPill
+                hostname="the-great-library"
+                :server-connected="serverConnected"
+                :uptime="uptime"
+                :seconds-until-next-ping="secondsUntilNextPing"
+                :ping-interval="PING_INTERVAL_SECS"
+              />
+            </template>
+          </ProjectBanner>
         </div>
 
         <h3 class="sub-title sub-title--spaced">More projects</h3>
@@ -219,7 +253,6 @@ const wins = [
             <h3 class="win-name">{{ w.project }}</h3>
             <p class="win-line">{{ w.line }}</p>
             <p class="win-foot">
-              <span class="win-prize">{{ w.prize }}</span>
               <a :href="w.url" target="_blank" rel="noopener" class="link">
                 Devpost <Icon name="heroicons:arrow-up-right-20-solid" class="link-icon" />
               </a>
@@ -503,25 +536,6 @@ const wins = [
   margin: 0 0 1rem;
 }
 
-.tags {
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-  margin: 0 0 1.1rem;
-}
-
-.tag {
-  font-size: 0.8rem;
-  font-weight: 300;
-  line-height: 1;
-  color: var(--text-1);
-  padding: 0.4rem 0.65rem;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
 .job-link {
   font-size: 0.875rem;
 }
@@ -532,11 +546,12 @@ const wins = [
 
 /* ---------- Projects ---------- */
 
-.features {
+.banners {
   display: flex;
   flex-direction: column;
-  gap: 4.5rem;
+  gap: 2rem;
 }
+
 
 .projects {
   list-style: none;
@@ -671,16 +686,12 @@ const wins = [
   margin: 0;
 }
 
-.win-prize {
-  font-size: 0.875rem;
-  color: var(--text-3);
-}
-
-/* ---------- Contact: 1.2x the original 60svh ---------- */
+/* ---------- Contact: a 16:9 frame (within 72-90svh) so more of the 3:2
+   portrait shows than in a short, wide strip ---------- */
 
 .contact {
   margin-top: 7rem;
-  min-height: 72svh;
+  min-height: max(72svh, min(56.25vw, 90svh));
   display: flex;
   align-items: flex-end;
   overflow: hidden;
@@ -813,9 +824,10 @@ const wins = [
     gap: 3rem;
   }
 
-  .features {
-    gap: 3rem;
+  .banners {
+    gap: 1.25rem;
   }
+
 
   .sub-title--spaced {
     margin-top: 3rem;

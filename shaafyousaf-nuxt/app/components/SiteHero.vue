@@ -11,7 +11,7 @@ const overlayImage = '/optimized/resources/blackSideOverlayGradient.webp'
 
     <div class="hero-inner">
       <h1 class="hello">Hi, I'm Shaaf.</h1>
-      <p class="role">I build reliable software, and the systems it runs on.</p>
+      <p class="role">I build reliable software, from the systems down to the hardware.</p>
 
       <p class="about">
         By day, C# and .NET at the Ontario Government on the PICASSO framework. At home, a self-hosted
