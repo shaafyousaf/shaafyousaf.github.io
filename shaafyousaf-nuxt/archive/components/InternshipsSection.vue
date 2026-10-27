@@ -71,7 +71,7 @@ const artsJobs = jobs.filter(job => job.type === 'Arts Internship')
           :initial="{ opacity: 0, y: 15 }"
           :while-in-view="{ opacity: 1, y: 0 }"
           :transition="{ duration: 0.3, delay: 0.2 + index * 0.1 }"
-          class="cs-card"
+          class="cs-card cs-card--overlay"
           @click="emit('item-click', job)"
         >
           <div v-if="job.image" class="cs-card-image">

@@ -534,6 +534,46 @@ a:hover {
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+/* ===================================
+   CARD ALTERNATE — full-bleed image, text overlaid at bottom
+   Usage: add cs-card--overlay alongside cs-card
+   =================================== */
+
+/* Fixed height so the image fills the whole card */
+.cs-card--overlay {
+  height: 220px;
+}
+
+/* Image fills the entire card */
+.cs-card--overlay .cs-card-image {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  z-index: 0;
+}
+
+/* Gradient darkens the bottom for legibility */
+.cs-card--overlay .cs-card-image-fade {
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.84) 0%,
+    rgba(0, 0, 0, 0.32) 55%,
+    rgba(0, 0, 0, 0.06) 100%
+  );
+}
+
+/* Content pinned to the bottom, over the image */
+.cs-card--overlay .cs-card-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  padding: 1.25rem;
+  /* remove the top flex-grow so it stays at the bottom */
+  flex: unset;
+}
+
 /* Action links */
 .cs-action-list {
   display: flex;
