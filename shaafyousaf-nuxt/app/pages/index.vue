@@ -184,7 +184,7 @@ const wins = [
             meta="Published on Chrome Web Store"
             :photos="[{ src: '/optimized/images/_DSC4383_compressed.webp', position: '0 45%' }]"
             :stats="[
-              { value: '1,500+', label: 'Installs' },
+              { value: '2,200+', label: 'Installs' },
               { value: '110+', label: 'Weekly active users' },
               { value: '#14', label: 'Product Hunt' },
             ]"
