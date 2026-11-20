@@ -31,7 +31,7 @@ const overlayImage = '/optimized/resources/blackSideOverlayGradient.webp'
                     tinker with hardware, and occasionally photograph satellites and stars. </Motion>
                 <!-- <Motion class="hero-tags" :initial="{ opacity: 0, filter: 'blur(8px)' }"
                     :while-in-view="{ opacity: 1, filter: 'blur(0px)' }"
-                    :transition="{ duration: 1, delay: 0.6, ease: [0.16, 1, 0.3, 1] }"> -->
+                    :transition="{ duration: 1, delay: 0.6, ease: [0.16, 1, 0.3, 1] }">
 
                     <div class="tag">.NET Developer @ Ontario Government</div>
 
@@ -40,7 +40,7 @@ const overlayImage = '/optimized/resources/blackSideOverlayGradient.webp'
                     <div class="tag">2x Hackathon Winner</div>
 
                     <div class="tag">Homelabber</div>
-                </Motion>
+                </Motion> -->
                 <Motion class="hero-buttons" :initial="{ opacity: 0, filter: 'blur(6px)' }"
                     :while-in-view="{ opacity: 1, filter: 'blur(0px)' }"
                     :transition="{ duration: 1, delay: 0.65, ease: [0.16, 1, 0.3, 1] }">

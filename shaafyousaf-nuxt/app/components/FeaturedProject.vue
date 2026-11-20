@@ -11,7 +11,7 @@ const featuredProject = {
   title: 'Slowed Enhanced',
   subtitle: 'An Open Source Google Chrome Extension for Advanced Audio Controls',
   category: 'Published on Chrome Web Store',
-  image: '/optimized/images/_DSC4383_compressed.webp',
+  image: '/optimized/images/slowed_enhanced_bg.webp',
   stats: {
     installs: '1200+',
     users: '90 (Apr - May)',
@@ -135,7 +135,7 @@ const handleClick = () => {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 0 45%;
+  object-position: 0 40%;
 }
 
 .gradient-overlay {
@@ -230,7 +230,7 @@ const handleClick = () => {
 
   .background-image {
     transform: scale(1.3);
-    object-position: center 45%;
+    object-position: center 40%;
   }
 
   .featured-content {
