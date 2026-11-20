@@ -182,7 +182,7 @@ const wins = [
             title="Slowed Enhanced"
             subtitle="An Open Source Google Chrome Extension for Advanced Audio Controls"
             meta="Published on Chrome Web Store"
-            :photos="[{ src: '/optimized/images/_DSC4383_compressed.webp', position: '0 45%' }]"
+            :photos="[{ src: '/optimized/images/slowed_enhanced_bg.webp', position: 'center 45%' }]"
             :stats="[
               { value: '2,200+', label: 'Installs' },
               { value: '110+', label: 'Weekly active users' },
