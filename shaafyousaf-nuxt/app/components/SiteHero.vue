@@ -20,7 +20,7 @@ const overlayImage = '/optimized/resources/blackSideOverlayGradient.webp'
 
       <p class="about">
         HBSc in Software Engineering at UofT (2023–2028), with over a year of experience at the
-        Ontario Government, Camel, and UTS. I focus on low-level systems, reliability, and performance.
+        Ontario Government and UTS. I focus on low-level systems, reliability, and performance.
       </p>
 
       <p class="links">
