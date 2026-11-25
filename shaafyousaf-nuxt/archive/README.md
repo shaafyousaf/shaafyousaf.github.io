@@ -12,3 +12,11 @@ homepage links to) and the Chrome extension privacy policies `/SEPolicy` and
 - `layouts/default.vue` — the old Navbar + Footer layout
 
 To bring a page back, move it into `app/pages/` along with any components it uses.
+
+## unused-public/
+
+Files that used to sit in `public/` but nothing on the site references
+(old photos, stress-test captures, videos, original-size images that now ship
+as WebP under `public/optimized/`). Moved here so they stop shipping with every
+deploy. Folder structure matches `public/`, so moving one back is a single
+`git mv`.

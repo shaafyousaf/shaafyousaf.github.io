@@ -81,21 +81,21 @@ const projects = [
     name: 'Parsea',
     text: 'Reads my inbox over IMAP and sorts job applications into interviews, offers and rejections.',
     stack: 'Electron, Cohere',
-    image: '/resources/parseaimg.png',
+    image: '/optimized/resources/parseaimg.webp',
     url: 'https://github.com/ShaafPlayz/Parsea.git',
   },
   {
     name: 'Planetze',
     text: 'An Android app that tracks your carbon footprint and suggests habits to cut it. Built by a five-person Scrum team.',
     stack: 'Java, Android, Firebase',
-    image: '/images/pla2.jpeg',
+    image: '/optimized/images/pla2.webp',
     url: 'https://github.com/KrishnaManamohan/B07FinalProject',
   },
   {
     name: 'Halo Pixel Edition',
     text: 'Halo, written entirely in MIPS assembly.',
     stack: 'MIPS, MARS simulator',
-    image: '/images/gffe.png',
+    image: '/optimized/images/gffe.webp',
     url: 'https://github.com/ShaafPlayz/Halo-Pixel-Edition',
   },
 ]
@@ -109,7 +109,7 @@ const wins = [
     project: 'idrak',
     event: 'DaVinci Competition 2026',
     line: 'A camera-based assistant that guides you through hands-on tasks in real time.',
-    image: '/images/BannerLinkedin.png',
+    image: '/optimized/images/BannerLinkedin.webp',
     url: 'https://devpost.com/software/idrak',
   },
   {
@@ -118,7 +118,7 @@ const wins = [
     project: 'imagEHR',
     event: 'GenAI Genesis 2025',
     line: 'Turns EHR text and X-rays into standard clinical data, a job that takes 6 to 8 weeks by hand.',
-    image: '/images/genai_imagehr_wid_c.jpg',
+    image: '/optimized/images/genai_imagehr_wid_c.webp',
     url: 'https://devpost.com/software/imagehr',
   },
 ]
@@ -224,7 +224,7 @@ const wins = [
             subtitle="A crowdsourced map of water temperatures at Toronto's beaches, built for a client by a four-person Scrum team."
             meta="Client project · Next.js, Express, MongoDB, Docker"
             align-right
-            :photos="[{ src: '/images/glow-banner.jpg', position: 'center top', brightness: 0.7 }]"
+            :photos="[{ src: '/optimized/images/glow-banner.webp', position: 'center top', brightness: 0.7 }]"
             :stats="[
               { value: '4', label: 'Person team' },
               { value: '4', label: 'Sprints in Jira' },
@@ -241,8 +241,8 @@ const wins = [
             hero-title
             :photos="[
               { src: '/optimized/images/homeserveroldPic.webp', position: '0 40%' },
-              { src: '/homelab/motherboardimage.jpeg', position: 'center' },
-              { src: '/homelab/setupimage.jpeg', position: 'center 30%' },
+              { src: '/optimized/homelab/motherboardimage.webp', position: 'center' },
+              { src: '/optimized/homelab/setupimage.webp', position: 'center 30%' },
             ]"
             :stats="[
               { value: '10+', label: 'Self-hosted services' },
@@ -303,7 +303,7 @@ const wins = [
 
     <!-- ============ Contact ============ -->
     <footer id="contact" class="contact">
-      <img src="/images/footer-shuttle.jpg" alt="" class="contact-image" loading="lazy" />
+      <img src="/optimized/images/footer-shuttle.webp" alt="" class="contact-image" loading="lazy" />
       <div class="contact-shade" aria-hidden="true" />
 
       <div class="contact-inner">

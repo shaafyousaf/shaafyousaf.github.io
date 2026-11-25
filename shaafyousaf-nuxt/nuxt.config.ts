@@ -15,7 +15,6 @@ export default defineNuxtConfig({
       ],
       link: [
         { rel: 'icon', type: 'image/png', href: '/resources/ShaafLabsLogo_Small.png' },
-        { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css' },
       ],
     },
   },
@@ -36,13 +35,8 @@ export default defineNuxtConfig({
     '~/assets/css/global.css',
   ],
   
-  fonts: {
-    families: [
-      { name: 'Inter', provider: 'google', weights: [300, 400, 500, 600, 700, 800, 900] },
-      { name: 'Plus Jakarta Sans', provider: 'google', weights: [300, 400, 500, 600, 700, 800] },
-      { name: 'Exo 2', provider: 'google', weights: [300, 400, 500, 600, 700, 800, 900] },
-    ],
-  },
+  // No font families forced in: the site is Nexa throughout (self-hosted in
+  // global.css). @nuxt/fonts still picks up anything a page names on its own.
   
   image: {
     quality: 80,

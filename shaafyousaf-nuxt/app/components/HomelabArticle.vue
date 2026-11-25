@@ -50,15 +50,15 @@ import { Motion } from 'motion-v'
           down.
         </p>
          <!-- <figure class="image-figure">
-          <img src="/homelab/motherboardimage.jpeg" alt="Preparing motherboard for a new 3D Printed Case (NEW)" class="article-image" />
+          <img src="/optimized/homelab/motherboardimage.webp" alt="Preparing motherboard for a new 3D Printed Case (NEW)" class="article-image" />
           <figcaption>Preparing motherboard for a new 3D Printed Case (NEW)</figcaption>
         </figure>
          <figure class="image-figure">
-          <img src="/homelab/setupimage.jpeg" alt="Ethernet Connections Image (NEW)" class="article-image" />
+          <img src="/optimized/homelab/setupimage.webp" alt="Ethernet Connections Image (NEW)" class="article-image" />
           <figcaption>Ethernet Connections Image (NEW)</figcaption>
         </figure> -->
         <figure class="image-figure">
-          <img src="/homelab/setupimage2.jpeg" alt="Hardware Setup Image" class="article-image" />
+          <img src="/optimized/homelab/setupimage2.webp" alt="Hardware Setup Image" class="article-image" />
           <figcaption>Hardware Setup (Old Image without backup Ethernet)</figcaption>
         </figure>
         <p class="article-text">
@@ -67,7 +67,7 @@ import { Motion } from 'motion-v'
         </p>
 
         <figure class="image-figure">
-          <img src="/homelab/networkTopology.png" alt="Network Topology Diagram" class="article-image" />
+          <img src="/optimized/homelab/networkTopology.webp" alt="Network Topology Diagram" class="article-image" />
           <figcaption>My Home Network Topology</figcaption>
         </figure>
       </section>
@@ -120,7 +120,7 @@ import { Motion } from 'motion-v'
           </p>
 
           <figure class="image-figure">
-            <img src="/homelab/vpnconnectionFlowChat.png" alt="VPN Connection Flow Diagram" class="article-image" />
+            <img src="/optimized/homelab/vpnconnectionFlowChat.webp" alt="VPN Connection Flow Diagram" class="article-image" />
             <figcaption>My VPN Connection Flow</figcaption>
           </figure>
         </div>
@@ -169,7 +169,7 @@ import { Motion } from 'motion-v'
           </p>
 
           <figure class="image-figure">
-            <img src="/homelab/cloudflaredflowchart.png" alt="Cloudflare Tunnel & Nginx Architecture Flowchart"
+            <img src="/optimized/homelab/cloudflaredflowchart.webp" alt="Cloudflare Tunnel & Nginx Architecture Flowchart"
               class="article-image" />
             <figcaption>Cloudflare Tunnel & Nginx Architecture Flowchart</figcaption>
           </figure>
@@ -246,7 +246,7 @@ import { Motion } from 'motion-v'
           </p>
 
           <figure class="image-figure">
-            <img src="/homelab/glancesScreenShot.png" alt="Monitoring Dashboard Screenshot" class="article-image" />
+            <img src="/optimized/homelab/glancesScreenShot.webp" alt="Monitoring Dashboard Screenshot" class="article-image" />
             <figcaption>Local Glances Dashboard Screenshot</figcaption>
           </figure>
         </div>

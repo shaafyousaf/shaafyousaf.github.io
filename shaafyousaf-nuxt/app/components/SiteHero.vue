@@ -1,11 +1,22 @@
 <script setup lang="ts">
 const backgroundImage = '/optimized/images/_DSC4379.webp'
+// Depth map for the photo above (white = near), made once with Depth Anything V2 Small
+const depthImage = '/optimized/images/_DSC4379_depth.webp'
+// Once the 3D scene has popped in, the photo underneath fades away
+const splatsOn = ref(false)
 const overlayImage = '/optimized/resources/blackSideOverlayGradient.webp'
 </script>
 
 <template>
   <header id="top" class="hero">
-    <img :src="backgroundImage" alt="" class="hero-image" fetchpriority="high" />
+    <img
+      :src="backgroundImage"
+      alt=""
+      class="hero-image"
+      :class="{ 'hero-image--behind': splatsOn }"
+      fetchpriority="high"
+    />
+    <HeroSplats :color="backgroundImage" :depth="depthImage" @settled="splatsOn = true" />
     <img :src="overlayImage" alt="" class="hero-overlay" />
     <div class="hero-fade" aria-hidden="true" />
 
@@ -53,6 +64,17 @@ const overlayImage = '/optimized/resources/blackSideOverlayGradient.webp'
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+/* Once the 3D scene has popped in, the photo underneath fades out
+   completely: the gaps behind near particles and under the cursor then
+   show the dark page and its stars, not a second copy */
+.hero-image {
+  transition: opacity 0.8s ease;
+}
+
+.hero-image--behind {
+  opacity: 0;
 }
 
 .hero-fade {
