@@ -51,14 +51,16 @@ const jobs = [
     dates: 'May 2026 to present',
     role: '.NET Developer',
     org: 'Ontario Government',
-    brief: "Work on PICASSO, the C# .NET framework behind several of Ontario's education apps, and built the test automation QA uses to write tests in plain English. Day to day that means C#, .NET, Angular, TypeScript, Playwright and Azure.",
+    brief: "I work on the shared framework behind several of Ontario's education apps, and I built a test tool that lets QA write tests in plain English instead of code.",
+    stack: ['C#', '.NET', 'Angular', 'TypeScript', 'Playwright', 'Azure'],
     url: 'https://utsccoopshaaf.vercel.app/',
   },
   {
     dates: 'Sep 2025 to Apr 2026',
     role: 'Junior Software Developer',
     org: 'University of Toronto Schools',
-    brief: 'Rebuilt two legacy apps used daily by staff and students, and built the IT ticketing platform from scratch, all in C# and .NET with Blazor, GraphQL, EF Core, SignalR and SQL Server.',
+    brief: "I rebuilt two old apps that staff and students use every day, and built the school's IT ticketing system from scratch.",
+    stack: ['C#', '.NET', 'Blazor', 'GraphQL', 'EF Core', 'SignalR', 'SQL Server'],
     url: 'https://files.shaafyousaf.com/UTS%20-%20Sep%2025%20to%20Apr%2026/home_artifact-number-1-asset-tracker.html',
   },
 ]
@@ -82,17 +84,10 @@ const projects = [
   },
   {
     name: 'Planetze',
-    text: 'An Android app for tracking your carbon footprint, with daily and habit trackers.',
-    stack: 'Java, Android',
+    text: 'An Android app that tracks your carbon footprint and suggests habits to cut it. Built by a five-person Scrum team.',
+    stack: 'Java, Android, Firebase',
     image: '/images/pla2.jpeg',
     url: 'https://github.com/KrishnaManamohan/B07FinalProject',
-  },
-  {
-    name: 'GLOW',
-    text: 'A live map of water temperatures at Toronto beaches.',
-    stack: 'Next.js, Express, MongoDB',
-    image: '/resources/GLOW.png',
-    url: 'https://github.com/UTSC-CSCC01-Software-Engineering-I/GLOW-WebApp.git',
   },
   {
     name: 'Halo Pixel Edition',
@@ -139,8 +134,9 @@ const wins = [
         <div class="experience">
           <h2 class="group-title group-title--center">Experience</h2>
 
-          <!-- Dates on the left, a rail down the middle, the role on the right.
-               Skills is the last stop on the same rail. -->
+          <!-- A launch sequence read top-down: the current role is the rocket in
+               flight, past roles are satellites it left in orbit, and Skills is the
+               launch pad the trail rises from. Dates left, trail middle, role right. -->
           <ol class="jobs">
             <li
               v-for="job in jobs"
@@ -148,11 +144,30 @@ const wins = [
               class="job"
               :class="{ 'job--current': job.dates.endsWith('present') }"
             >
-              <p class="job-dates">{{ job.dates }}</p>
+              <span class="job-marker" aria-hidden="true">
+                <svg v-if="job.dates.endsWith('present')" class="rocket" viewBox="0 0 24 24">
+                  <path class="rocket-flame" d="M10.2 18.5c0 1.9.8 3.4 1.8 4 1-.6 1.8-2.1 1.8-4z" />
+                  <path class="rocket-body" d="M12 1.5c2.9 2.4 4.4 5.9 4.4 9.9v5.6H7.6v-5.6c0-4 1.5-7.5 4.4-9.9z" />
+                  <circle class="rocket-window" cx="12" cy="9" r="1.7" />
+                  <path class="rocket-body" d="M7.6 12.6 4.8 15.8v3.4l2.8-1.7zM16.4 12.6l2.8 3.2v3.4l-2.8-1.7z" />
+                </svg>
+                <svg v-else class="satellite" viewBox="0 0 24 24">
+                  <rect x="9" y="9" width="6" height="6" rx="1" />
+                  <path d="M1.5 9.5h5.5v5H1.5zM17 9.5h5.5v5H17zM4.25 9.5v5M19.75 9.5v5M7 12h2M15 12h2M12 9V5.5" />
+                  <circle class="satellite-beacon" cx="12" cy="4.2" r="1.3" />
+                </svg>
+              </span>
+              <p class="job-dates">
+                {{ job.dates }}
+                <span v-if="job.dates.endsWith('present')" class="job-status">In flight</span>
+              </p>
               <div class="job-body">
                 <h3 class="job-role">{{ job.role }}</h3>
                 <p class="job-org">{{ job.org }}</p>
                 <p class="job-brief">{{ job.brief }}</p>
+                <ul class="chips" aria-label="Built with">
+                  <li v-for="tool in job.stack" :key="tool">{{ tool }}</li>
+                </ul>
                 <a :href="job.url" target="_blank" rel="noopener" class="link job-link">
                   Work sample <Icon name="heroicons:arrow-up-right-20-solid" class="link-icon" />
                 </a>
@@ -160,11 +175,20 @@ const wins = [
             </li>
 
             <li class="job job--skills">
+              <span class="job-marker" aria-hidden="true">
+                <svg class="launchpad" viewBox="0 0 24 24">
+                  <path d="M2.5 21.5h19M6 21.5V4M9.5 21.5V4M6 8l3.5-3M6 12.5 9.5 9M6 17l3.5-3.5M9.5 8.5H14M12.5 21.5v-3.5h6.5v3.5" />
+                </svg>
+              </span>
               <h3 class="job-dates">Skills</h3>
               <dl class="record job-body">
                 <div v-for="row in skills" :key="row.label">
                   <dt>{{ row.label }}</dt>
-                  <dd>{{ row.value }}</dd>
+                  <dd>
+                    <ul class="chips">
+                      <li v-for="item in row.value.split(', ')" :key="item">{{ item }}</li>
+                    </ul>
+                  </dd>
                 </div>
               </dl>
             </li>
@@ -193,6 +217,22 @@ const wins = [
               { label: 'Source', url: 'https://github.com/shaafyousaf/Slowed-Enhanced' },
               { label: 'Product Hunt', url: 'https://www.producthunt.com/products/slowed-enchanced/launches/slowed-enchanced' },
             ]"
+          />
+
+          <ProjectBanner
+            id="glow"
+            title="GLOW"
+            subtitle="A crowdsourced map of water temperatures at Toronto's beaches, built for a client by a four-person Scrum team."
+            meta="Client project · Next.js, Express, MongoDB, Docker"
+            align-right
+            :photos="[{ src: '/images/glow-banner.jpg', position: 'center 95%', brightness: 0.7 }]"
+            :stats="[
+              { value: '4', label: 'Person team' },
+              { value: '4', label: 'Sprints in Jira' },
+              { value: '64', label: 'Pull requests' },
+              { value: '105', label: 'Commits, most on the team' },
+            ]"
+            :links="[{ label: 'Source', url: 'https://github.com/UTSC-CSCC01-Software-Engineering-I/GLOW-WebApp' }]"
           />
 
           <ProjectBanner
@@ -317,7 +357,7 @@ const wins = [
 }
 
 .group {
-  padding-top: 6rem;
+  padding-top: 4.5rem;
   scroll-margin-top: 1rem;
 }
 
@@ -329,8 +369,8 @@ const wins = [
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--text-1);
-  margin: 0 0 2rem;
-  padding-bottom: 0.85rem;
+  margin: 0 0 1.5rem;
+  padding-bottom: 0.75rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 }
 
@@ -347,27 +387,30 @@ const wins = [
 }
 
 .sub-title--spaced {
-  margin-top: 4rem;
+  margin-top: 3rem;
 }
 
 /* Labelled lines: the "clear subjects" used across the page */
 .record {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.85rem;
   margin: 0;
 }
 
 .record > div {
   display: grid;
   grid-template-columns: 7.5rem 1fr;
+  align-items: start;
   gap: 1rem;
   font-size: 0.95rem;
-  line-height: 1.6;
+  line-height: 1.5;
 }
 
 .record dt {
   color: var(--text-2);
+  /* Lines the label up with the text in the first row of tags */
+  padding-top: 0.25rem;
 }
 
 .record dd {
@@ -422,20 +465,25 @@ const wins = [
   list-style: none;
 }
 
-/* The rail: bright at the top, fading out past the last stop */
-.jobs::before {
+/* The trail, one segment per stop down to the launch pad: hot exhaust right
+   under the rocket, cooling to a faint vapour trail further down */
+.job:not(.job--skills)::after {
   content: '';
   position: absolute;
   left: calc(var(--rail-x) - 1px);
-  top: 0.75rem;
-  bottom: -1.5rem;
+  top: 1.4rem;
+  bottom: -0.6rem;
   width: 2px;
   border-radius: 2px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.22));
+}
+
+.job--current::after {
   background: linear-gradient(
     to bottom,
-    rgba(255, 255, 255, 0.85) 0%,
-    rgba(255, 255, 255, 0.3) 60%,
-    rgba(255, 255, 255, 0) 100%
+    rgba(255, 179, 71, 0.95) 0%,
+    rgba(255, 220, 170, 0.8) 18%,
+    rgba(255, 255, 255, 0.4) 100%
   );
 }
 
@@ -444,40 +492,180 @@ const wins = [
   display: grid;
   grid-template-columns: var(--date-col) 1fr;
   column-gap: var(--rail-gap);
-  padding-bottom: 3.25rem;
+  padding-bottom: 2.5rem;
 }
 
-/* Stops on the rail: hollow for past roles */
-.job::before {
-  content: '';
+/* Stops on the trail: a rocket for the current role, satellites for past
+   ones. The black disc hides the trail behind each icon. */
+.job-marker {
   position: absolute;
-  left: calc(var(--rail-x) - 7px);
-  top: 0.3rem;
-  width: 14px;
-  height: 14px;
+  left: calc(var(--rail-x) - 14px);
+  top: -0.2rem;
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
   border-radius: 50%;
   background: #000;
-  border: 2px solid var(--text-2);
 }
 
-/* The current role glows */
-.job--current::before {
-  background: var(--text-1);
-  border-color: var(--text-1);
-  animation: job-glow 2.8s ease-in-out infinite;
+.job-marker svg {
+  position: relative;
+  z-index: 1;
+  width: 22px;
+  height: 22px;
+  overflow: visible;
+}
+
+.job--current .job-marker svg {
+  width: 26px;
+  height: 26px;
+}
+
+/* A faint tilted orbit around each satellite */
+.job-marker:has(.satellite)::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 46px;
+  height: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) rotate(-18deg);
+}
+
+/* Soft engine glow under the rocket */
+.job--current .job-marker::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 70%;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 160, 60, 0.35) 0%, rgba(255, 160, 60, 0) 70%);
+  transform: translate(-50%, -50%);
+  animation: engine-glow 1.8s ease-in-out infinite;
+}
+
+.rocket {
+  animation: rocket-hover 3s ease-in-out infinite;
+}
+
+.rocket-body {
+  fill: var(--text-1);
+}
+
+.rocket-window {
+  fill: #000;
+}
+
+.rocket-flame {
+  fill: #ffb347;
+  transform-box: fill-box;
+  transform-origin: top center;
+  filter: drop-shadow(0 0 3px rgba(255, 160, 60, 0.9));
+  animation: rocket-flame 0.16s ease-in-out infinite alternate;
+}
+
+.satellite {
+  fill: none;
+  stroke: var(--text-2);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  animation: satellite-drift 8s ease-in-out infinite;
 }
 
 .job--current .job-dates {
   color: var(--text-1);
 }
 
-@keyframes job-glow {
+@keyframes rocket-hover {
   0%,
   100% {
-    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.1), 0 0 10px rgba(255, 255, 255, 0.3);
+    transform: translateY(0);
   }
   50% {
-    box-shadow: 0 0 0 7px rgba(255, 255, 255, 0.04), 0 0 22px rgba(255, 255, 255, 0.55);
+    transform: translateY(-2px);
+  }
+}
+
+@keyframes rocket-flame {
+  from {
+    transform: scaleY(0.7);
+    opacity: 0.75;
+  }
+  to {
+    transform: scaleY(1.15);
+    opacity: 1;
+  }
+}
+
+.satellite-beacon {
+  fill: #ff5a4e;
+  stroke: none;
+  animation: beacon 2.4s steps(1, end) infinite;
+}
+
+.launchpad {
+  fill: none;
+  stroke: var(--text-3);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.job-status {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.4rem;
+  margin-top: 0.3rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: #ffb347;
+}
+
+.job-status::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 6px currentColor;
+  animation: beacon 1.6s ease-in-out infinite;
+}
+
+@keyframes engine-glow {
+  0%,
+  100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes beacon {
+  0%,
+  60% {
+    opacity: 1;
+  }
+  61%,
+  100% {
+    opacity: 0.25;
+  }
+}
+
+@keyframes satellite-drift {
+  0%,
+  100% {
+    transform: rotate(-14deg);
+  }
+  50% {
+    transform: rotate(10deg);
   }
 }
 
@@ -485,14 +673,6 @@ const wins = [
   padding-bottom: 0;
 }
 
-.job--skills::before {
-  left: calc(var(--rail-x) - 4px);
-  top: 0.45rem;
-  width: 8px;
-  height: 8px;
-  border: none;
-  background: var(--text-3);
-}
 
 .job-dates {
   font-family: var(--font-display);
@@ -526,14 +706,40 @@ const wins = [
   font-size: 1rem;
   line-height: 1.5;
   color: var(--text-1);
-  margin: 0.15rem 0 0.85rem;
+  margin: 0.1rem 0 0.6rem;
 }
 
 .job-brief {
   font-size: 1rem;
-  line-height: 1.65;
+  line-height: 1.55;
   color: var(--text-2);
-  margin: 0 0 1rem;
+  margin: 0 0 0.85rem;
+}
+
+/* Tags for tools: under each role and in Skills */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Kept quiet so the role and what you did lead */
+.chips li {
+  font-size: 0.75rem;
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--text-3);
+  padding: 0.38rem 0.6rem 0.3rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+}
+
+.job-body .chips {
+  gap: 0.3rem;
+  margin-bottom: 1rem;
 }
 
 .job-link {
@@ -549,7 +755,7 @@ const wins = [
 .banners {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1.5rem;
 }
 
 
@@ -557,7 +763,7 @@ const wins = [
   list-style: none;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 2rem 1.5rem;
+  gap: 1.75rem 1.5rem;
 }
 
 .project {
@@ -576,7 +782,7 @@ const wins = [
   overflow: hidden;
   border-radius: 6px;
   background: #111;
-  margin-bottom: 0.9rem;
+  margin-bottom: 0.75rem;
 }
 
 .project-image img {
@@ -603,9 +809,9 @@ const wins = [
 
 .project-text {
   font-size: 0.9375rem;
-  line-height: 1.6;
+  line-height: 1.5;
   color: var(--text-2);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.4rem;
 }
 
 .project-stack {
@@ -618,7 +824,7 @@ const wins = [
 .wins {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 2.5rem 3rem;
+  gap: 2rem 2.5rem;
 }
 
 .win {
@@ -631,7 +837,7 @@ const wins = [
   aspect-ratio: 16 / 6;
   overflow: hidden;
   border-radius: 6px;
-  margin-bottom: 1rem;
+  margin-bottom: 0.85rem;
   background: #0e0e0e;
 }
 
@@ -672,10 +878,10 @@ const wins = [
 
 .win-line {
   font-size: 1rem;
-  line-height: 1.65;
+  line-height: 1.55;
   color: var(--text-2);
   max-width: 62ch;
-  margin: 0 0 0.75rem;
+  margin: 0 0 0.6rem;
 }
 
 .win-foot {
@@ -781,11 +987,11 @@ const wins = [
   }
 
   .group {
-    padding-top: 4.5rem;
+    padding-top: 3.5rem;
   }
 
-  /* Rail moves to the left edge; dates sit above each role */
-  .jobs::before {
+  /* Trail moves to the left edge; dates sit above each role */
+  .job:not(.job--skills)::after {
     left: 6px;
   }
 
@@ -793,16 +999,13 @@ const wins = [
     grid-template-columns: 1fr;
     row-gap: 0.4rem;
     padding-left: 2rem;
-    padding-bottom: 2.75rem;
+    padding-bottom: 2.25rem;
   }
 
-  .job::before {
-    left: 0;
+  .job-marker {
+    left: -7px;
   }
 
-  .job--skills::before {
-    left: 3px;
-  }
 
   .job-dates {
     text-align: left;
@@ -810,22 +1013,33 @@ const wins = [
     margin: 0;
   }
 
-  .job--skills .record > div {
-    grid-template-columns: 6.25rem 1fr;
+  .job-status {
+    display: inline-flex;
+    margin: 0 0 0 0.75rem;
   }
 
+  /* Label above its tags; side by side leaves the tags too narrow */
+  .job--skills .record > div,
   .record > div {
-    grid-template-columns: 6.25rem 1fr;
-    gap: 0.75rem;
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  .record dt {
+    padding-top: 0;
+  }
+
+  .record {
+    gap: 1.1rem;
   }
 
   .wins {
     grid-template-columns: 1fr;
-    gap: 3rem;
+    gap: 2.25rem;
   }
 
   .banners {
-    gap: 1.25rem;
+    gap: 1rem;
   }
 
   /* Text only on phones; the screenshots are too small to read there */
@@ -835,7 +1049,7 @@ const wins = [
 
 
   .sub-title--spaced {
-    margin-top: 3rem;
+    margin-top: 2.25rem;
   }
 
   .contact {
@@ -875,9 +1089,13 @@ const wins = [
     transition: none;
   }
 
-  .job--current::before {
+  .rocket,
+  .rocket-flame,
+  .satellite,
+  .satellite-beacon,
+  .job-status::before,
+  .job--current .job-marker::before {
     animation: none;
-    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.1), 0 0 14px rgba(255, 255, 255, 0.4);
   }
 }
 </style>

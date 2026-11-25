@@ -5,6 +5,8 @@
 interface Photo {
   src: string
   position?: string
+  /** Below 1 darkens a bright photo (e.g. a light screenshot) so white text reads */
+  brightness?: number
 }
 
 interface Props {
@@ -44,7 +46,10 @@ const isExternal = (url: string) => /^https?:/.test(url)
         :src="photo.src"
         alt=""
         class="banner-image"
-        :style="{ '--image-position': photo.position }"
+        :style="{
+          '--image-position': photo.position,
+          filter: photo.brightness ? `brightness(${photo.brightness})` : undefined,
+        }"
         loading="lazy"
       />
     </Transition>
@@ -98,7 +103,7 @@ const isExternal = (url: string) => /^https?:/.test(url)
 <style scoped>
 .banner {
   position: relative;
-  min-height: 360px;
+  min-height: 320px;
   display: flex;
   align-items: center;
   overflow: hidden;
@@ -209,7 +214,7 @@ const isExternal = (url: string) => /^https?:/.test(url)
 .banner-content {
   position: relative;
   z-index: 1;
-  padding: 2.5rem 3rem;
+  padding: 2rem 2.5rem;
 }
 
 .banner-title {
@@ -266,7 +271,7 @@ const isExternal = (url: string) => /^https?:/.test(url)
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem 2rem;
-  margin: 1.25rem 0 0;
+  margin: 1rem 0 0;
 }
 
 .banner--right .banner-stats,
@@ -295,7 +300,7 @@ const isExternal = (url: string) => /^https?:/.test(url)
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem 1.5rem;
-  margin: 1.5rem 0 0;
+  margin: 1.25rem 0 0;
 }
 
 .banner-link {
@@ -338,7 +343,7 @@ const isExternal = (url: string) => /^https?:/.test(url)
 @media (max-width: 768px) {
   .banner,
   .banner--right {
-    min-height: 340px;
+    min-height: 310px;
     align-items: flex-end;
     justify-content: flex-start;
     text-align: left;
@@ -374,7 +379,7 @@ const isExternal = (url: string) => /^https?:/.test(url)
   }
 
   .banner-content {
-    padding: 5rem 1.5rem 1.75rem;
+    padding: 4rem 1.25rem 1.5rem;
   }
 
   .banner-title {
@@ -426,7 +431,7 @@ const isExternal = (url: string) => /^https?:/.test(url)
   .banner--right .banner-links {
     justify-content: flex-start;
     gap: 0.5rem 1.25rem;
-    margin-top: 1.25rem;
+    margin-top: 1rem;
   }
 
   .banner-link {

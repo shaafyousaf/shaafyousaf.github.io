@@ -34,8 +34,8 @@ const overlayImage = '/optimized/resources/blackSideOverlayGradient.webp'
 <style scoped>
 .hero {
   position: relative;
-  height: 90svh;
-  min-height: 600px;
+  height: 78svh;
+  min-height: 540px;
   display: flex;
   align-items: flex-end;
   overflow: hidden;
@@ -64,7 +64,7 @@ const overlayImage = '/optimized/resources/blackSideOverlayGradient.webp'
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 2.5rem 4.5rem;
+  padding: 0 2.5rem 3.5rem;
 }
 
 .hello {
@@ -75,7 +75,7 @@ const overlayImage = '/optimized/resources/blackSideOverlayGradient.webp'
   letter-spacing: -0.025em;
   text-transform: none;
   color: #fff;
-  margin: 0 0 0.5rem;
+  margin: 0 0 0.4rem;
 }
 
 .role {
@@ -84,17 +84,17 @@ const overlayImage = '/optimized/resources/blackSideOverlayGradient.webp'
   font-size: clamp(1.15rem, 1.7vw, 1.4rem);
   line-height: 1.3;
   color: #fff;
-  margin: 0 0 1.25rem;
+  margin: 0 0 0.85rem;
 }
 
 .about {
   font-family: var(--font-display, 'Nexa', sans-serif);
   font-weight: 300;
   font-size: 1.0625rem;
-  line-height: 1.65;
+  line-height: 1.55;
   color: #e5e5e5;
-  max-width: 34rem;
-  margin: 0 0 2rem;
+  max-width: 36rem;
+  margin: 0 0 1.5rem;
 }
 
 .links {
@@ -128,6 +128,11 @@ const overlayImage = '/optimized/resources/blackSideOverlayGradient.webp'
 }
 
 @media (max-width: 768px) {
+  /* Taller on phones so the title stays clear of the face in the photo */
+  .hero {
+    height: 90svh;
+  }
+
   .hero-image {
     object-position: 62% center;
   }
@@ -144,7 +149,7 @@ const overlayImage = '/optimized/resources/blackSideOverlayGradient.webp'
   }
 
   .hero-inner {
-    padding: 0 1.5rem 3rem;
+    padding: 0 1.5rem 2.5rem;
   }
 
   .about {
