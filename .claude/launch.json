@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "nuxt-dev",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["--dir", "shaafyousaf-nuxt", "dev"],
+      "port": 3000
+    }
+  ]
+}

@@ -137,6 +137,8 @@ const overlayImage = '/optimized/resources/blackSideOverlayGradient.webp'
     0 0 0.3em rgba(255, 150, 60, 0.3);
 }
 
+
+
 /* Orbit around the whole name, drawn faintly behind the letters */
 .name-orbit {
   position: absolute;
@@ -187,6 +189,10 @@ const overlayImage = '/optimized/resources/blackSideOverlayGradient.webp'
   border-radius: 50%;
   background: radial-gradient(circle at 35% 35%, #fff, #c9d0dc);
   box-shadow: 0 0 0.06em rgba(255, 255, 255, 0.7);
+}
+
+.planet-a::before{
+  display: none;
 }
 
 @keyframes moon-x {
