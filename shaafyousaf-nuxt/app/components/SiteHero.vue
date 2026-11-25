@@ -10,7 +10,12 @@ const overlayImage = '/optimized/resources/blackSideOverlayGradient.webp'
     <div class="hero-fade" aria-hidden="true" />
 
     <div class="hero-inner">
-      <h1 class="hello">Hi, I'm Shaaf.</h1>
+      <!-- "Shaaf" has a moon on a faint tilted orbit around it, slipping behind
+           the letters on the far side, and its first "a" sits on a small
+           ember-orange planet, the same warm accent as the rocket flame -->
+      <h1 class="hello">
+        Hi, I'm <span class="name">Sh<span class="planet-a">a</span>af<span class="name-orbit" aria-hidden="true"><span class="orbit-ring" /><span class="moon-path"><span class="moon-x"><span class="moon-y"><span class="moon" /></span></span></span></span></span>.
+      </h1>
       <p class="role">I write software across the stack, from bare-metal code to self-hosted infrastructure.</p>
 
       <p class="about">
@@ -76,6 +81,137 @@ const overlayImage = '/optimized/resources/blackSideOverlayGradient.webp'
   text-transform: none;
   color: #fff;
   margin: 0 0 0.4rem;
+}
+
+.name {
+  position: relative;
+  display: inline-block;
+}
+
+/* The "a" on a planet: a warm ember sphere lit from the top left, with the
+   letter kept white on top so the name still reads */
+.planet-a {
+  position: relative;
+  display: inline-block;
+}
+
+.planet-a::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  left: 50%;
+  /* Measured in Nexa Heavy: the baseline sits 0.182em above this box's
+     bottom and the "a" is 0.504em tall, so a 0.7em sphere centred on it
+     starts 0.084em up */
+  bottom: 0.084em;
+  width: 0.7em;
+  height: 0.7em;
+  margin-left: -0.35em;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 26%, #ffd39a 0%, #e8913f 34%, #a84f1d 70%, #4a1d0a 100%);
+  box-shadow:
+    inset -0.07em -0.07em 0.12em rgba(0, 0, 0, 0.45),
+    0 0 0.05em rgba(255, 190, 120, 0.8),
+    0 0 0.3em rgba(255, 150, 60, 0.3);
+}
+
+/* Orbit around the whole name, drawn faintly behind the letters */
+.name-orbit {
+  position: absolute;
+  left: -12%;
+  right: -12%;
+  top: 50%;
+  height: 0.5em;
+  margin-top: -0.2em;
+  transform: rotate(-7deg);
+  pointer-events: none;
+}
+
+.orbit-ring {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+}
+
+/* x and y swing a quarter-turn apart to trace the ellipse; on the far half of
+   each lap the moon drops behind the letters */
+.moon-path {
+  position: absolute;
+  inset: 0;
+  animation: moon-depth 9s linear infinite;
+}
+
+.moon-x {
+  position: absolute;
+  inset: 0;
+  animation: moon-x 4.5s ease-in-out infinite alternate;
+}
+
+.moon-y {
+  position: absolute;
+  inset: 0;
+  animation: moon-y 4.5s ease-in-out -2.25s infinite alternate;
+}
+
+.moon {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0.09em;
+  height: 0.09em;
+  margin: -0.045em 0 0 -0.045em;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fff, #c9d0dc);
+  box-shadow: 0 0 0.06em rgba(255, 255, 255, 0.7);
+}
+
+@keyframes moon-x {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(50%);
+  }
+}
+
+@keyframes moon-y {
+  from {
+    transform: translateY(-50%);
+  }
+  to {
+    transform: translateY(50%);
+  }
+}
+
+/* Near side for the first half of each lap, behind the letters for the second */
+@keyframes moon-depth {
+  0%,
+  49.9% {
+    z-index: 1;
+  }
+  50%,
+  100% {
+    z-index: -1;
+  }
+}
+
+/* Still frame: the moon parked on the near side of its orbit */
+@media (prefers-reduced-motion: reduce) {
+  .moon-path,
+  .moon-x,
+  .moon-y {
+    animation: none;
+  }
+
+  .moon-x {
+    transform: translateX(-30%);
+  }
+
+  .moon-y {
+    transform: translateY(40%);
+  }
 }
 
 .role {

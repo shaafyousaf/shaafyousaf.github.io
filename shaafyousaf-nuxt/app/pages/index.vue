@@ -65,10 +65,12 @@ const jobs = [
   },
 ]
 
+// Two columns on wide screens, filled left to right: the short groups pair up
+// on the first row and the long ones on the second, so the columns balance
 const skills = [
   { label: 'Languages', value: 'C#, TypeScript, JavaScript, Python, SQL, C' },
-  { label: 'Frameworks', value: '.NET, ASP.NET Core, EF Core, Blazor, GraphQL, Angular, Vue.js, Next.js, Flask, Playwright, WebSockets' },
   { label: 'Databases', value: 'SQL Server, PostgreSQL, Oracle SQL, MongoDB' },
+  { label: 'Frameworks', value: '.NET, ASP.NET Core, EF Core, Blazor, GraphQL, Angular, Vue.js, Next.js, Flask, Playwright, WebSockets' },
   { label: 'Tools', value: 'Git, Docker, GitHub Actions, Azure DevOps, Nginx, Proxmox, Ubuntu Server' },
 ]
 
@@ -157,10 +159,7 @@ const wins = [
                   <circle class="satellite-beacon" cx="12" cy="4.2" r="1.3" />
                 </svg>
               </span>
-              <p class="job-dates">
-                {{ job.dates }}
-                <span v-if="job.dates.endsWith('present')" class="job-status">In flight</span>
-              </p>
+              <p class="job-dates">{{ job.dates }}</p>
               <div class="job-body">
                 <h3 class="job-role">{{ job.role }}</h3>
                 <p class="job-org">{{ job.org }}</p>
@@ -225,7 +224,7 @@ const wins = [
             subtitle="A crowdsourced map of water temperatures at Toronto's beaches, built for a client by a four-person Scrum team."
             meta="Client project · Next.js, Express, MongoDB, Docker"
             align-right
-            :photos="[{ src: '/images/glow-banner.jpg', position: 'center 95%', brightness: 0.7 }]"
+            :photos="[{ src: '/images/glow-banner.jpg', position: 'center top', brightness: 0.7 }]"
             :stats="[
               { value: '4', label: 'Person team' },
               { value: '4', label: 'Sprints in Jira' },
@@ -392,25 +391,21 @@ const wins = [
 
 /* Labelled lines: the "clear subjects" used across the page */
 .record {
-  display: flex;
-  flex-direction: column;
-  gap: 0.85rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem 2.25rem;
   margin: 0;
 }
 
-.record > div {
-  display: grid;
-  grid-template-columns: 7.5rem 1fr;
-  align-items: start;
-  gap: 1rem;
-  font-size: 0.95rem;
-  line-height: 1.5;
-}
-
+/* Group label above its tags, styled like the date labels */
 .record dt {
-  color: var(--text-2);
-  /* Lines the label up with the text in the first row of tags */
-  padding-top: 0.25rem;
+  font-weight: 700;
+  font-size: 0.72rem;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-bottom: 0.6rem;
 }
 
 .record dd {
@@ -617,27 +612,6 @@ const wins = [
   stroke-linejoin: round;
 }
 
-.job-status {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 0.4rem;
-  margin-top: 0.3rem;
-  font-size: 0.7rem;
-  letter-spacing: 0.1em;
-  color: #ffb347;
-}
-
-.job-status::before {
-  content: '';
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: currentColor;
-  box-shadow: 0 0 6px currentColor;
-  animation: beacon 1.6s ease-in-out infinite;
-}
-
 @keyframes engine-glow {
   0%,
   100% {
@@ -728,12 +702,12 @@ const wins = [
 
 /* Kept quiet so the role and what you did lead */
 .chips li {
-  font-size: 0.75rem;
+  font-size: 0.78rem;
   line-height: 1;
   white-space: nowrap;
-  color: var(--text-3);
-  padding: 0.38rem 0.6rem 0.3rem;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--text-2);
+  padding: 0.4rem 0.62rem 0.32rem;
+  border: 1px solid rgba(255, 255, 255, 0.13);
   border-radius: 999px;
 }
 
@@ -746,9 +720,6 @@ const wins = [
   font-size: 0.875rem;
 }
 
-.job--skills .record > div {
-  grid-template-columns: 8rem 1fr;
-}
 
 /* ---------- Projects ---------- */
 
@@ -1013,24 +984,11 @@ const wins = [
     margin: 0;
   }
 
-  .job-status {
-    display: inline-flex;
-    margin: 0 0 0 0.75rem;
-  }
-
-  /* Label above its tags; side by side leaves the tags too narrow */
-  .job--skills .record > div,
-  .record > div {
-    grid-template-columns: 1fr;
-    gap: 0.5rem;
-  }
-
-  .record dt {
-    padding-top: 0;
-  }
-
+  /* One column on phones, set a little apart from the Skills heading */
   .record {
-    gap: 1.1rem;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    margin-top: 0.6rem;
   }
 
   .wins {
@@ -1093,7 +1051,6 @@ const wins = [
   .rocket-flame,
   .satellite,
   .satellite-beacon,
-  .job-status::before,
   .job--current .job-marker::before {
     animation: none;
   }
