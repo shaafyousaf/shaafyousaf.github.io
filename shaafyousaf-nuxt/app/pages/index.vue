@@ -2,7 +2,7 @@
 useHead({
   title: 'Shaaf Yousaf',
   meta: [
-    { name: 'description', content: "Hi, I'm Shaaf. I build reliable software and systems." },
+    { name: 'description', content: "Hi, I'm Shaaf. I write software across the stack, from bare-metal code to self-hosted infrastructure." },
     // Global config uses initial-scale=0.9; this page is laid out for 1:1
     { name: 'viewport', content: 'width=device-width, initial-scale=1' },
   ],
@@ -264,7 +264,7 @@ const wins = [
 
     <!-- ============ Contact ============ -->
     <footer id="contact" class="contact">
-      <img src="/images/_DSC4365 (Large).JPG" alt="" class="contact-image" loading="lazy" />
+      <img src="/images/footer-shuttle.jpg" alt="" class="contact-image" loading="lazy" />
       <div class="contact-shade" aria-hidden="true" />
 
       <div class="contact-inner">
@@ -703,7 +703,7 @@ const wins = [
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 65% 30%;
+  object-position: 50% 100%;
 }
 
 .contact-shade {
@@ -845,7 +845,7 @@ const wins = [
 
   /* Centre the portrait and shade from the bottom instead of the side */
   .contact-image {
-    object-position: 50% 25%;
+    object-position: 55% 50%;
   }
 
   .contact-shade {

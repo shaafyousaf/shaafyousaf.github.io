@@ -11,11 +11,11 @@ const overlayImage = '/optimized/resources/blackSideOverlayGradient.webp'
 
     <div class="hero-inner">
       <h1 class="hello">Hi, I'm Shaaf.</h1>
-      <p class="role">I build reliable software, from the systems down to the hardware.</p>
+      <p class="role">I write software across the stack, from bare-metal code to self-hosted infrastructure.</p>
 
       <p class="about">
-        By day, C# and .NET at the Ontario Government on the PICASSO framework. At home, a self-hosted
-        server running 10+ services. I'm a third-year Software Engineering student at UofT.
+        HBSc in Software Engineering at UofT (2023–2028), with over a year of experience at the
+        Ontario Government, Camel, and UTS. I focus on low-level systems, reliability, and performance.
       </p>
 
       <p class="links">
